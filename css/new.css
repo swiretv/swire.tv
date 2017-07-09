@@ -1,0 +1,20 @@
+.imgwelcome {
+    height: 100%;
+	margin-bottom: 0;
+}
+video#livedemo {
+	background: black;
+	width: 100%;
+}
+.modal-container .modal-content .modal-close-cross {
+    color: white;
+}
+
+#subt {
+    font-weight: 500;
+    cursor: default;
+	user-select: none;
+}
+.modal-instance {
+    margin-top: 10px;
+}

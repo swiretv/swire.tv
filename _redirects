@@ -1,0 +1,26 @@
+http://swire.tv/* https://swire.tv/:splat 301!
+http://www.swire.tv/* https://www.swire.tv/:splat 301!
+
+https://s1.swire.tv/:usern/:passw/:ty/:ot https://s1.swire.tv/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
+http://s1.swire.tv/:usern/:passw/:ty/:ot http://s1.swire.tv/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
+
+https://s1.swire.tv/painel/* https://cms.xtream-codes.com/xcbb7317/:splat 302
+http://s1.swire.tv/painel/* https://cms.xtream-codes.com/xcbb7317/:splat 302
+
+https://s1.swire.tv/* http://livehd.swiretv.stream:8000/:splat 200
+http://s1.swire.tv/* http://livehd.swiretv.stream:8000/:splat 200
+
+https://s2.swire.tv/:usern/:passw/:ty/:ot http://sbl.swiretv.stream:8081/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
+http://s2.swire.tv/:usern/:passw/:ty/:ot http://sbl.swiretv.stream:8081/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
+
+https://s2.swire.tv/painel/* https://cms.xtream-codes.com/xc7eb9c9/:splat 302
+http://s2.swire.tv/painel/* https://cms.xtream-codes.com/xc7eb9c9/:splat 302
+
+https://s2.swire.tv/* http://sbl.swiretv.stream:8081/:splat 200
+http://s2.swire.tv/* http://sbl.swiretv.stream:8081/:splat 200
+
+https://s3.swire.tv/:usern/:passw/:ty/:ot http://elite.swiretv.stream:25461/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
+http://s3.swire.tv/:usern/:passw/:ty/:ot http://elite.swiretv.stream:25461/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
+
+https://s3.swire.tv/painel/* https://cms-eu.xtream-codes.com/xc0229e4/:splat 302
+http://s3.swire.tv/painel/* https://cms-eu.xtream-codes.com/xc0229e4/:splat 302
