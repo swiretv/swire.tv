@@ -226,8 +226,13 @@ fieldset {
 <script>
 if(window.location.hash.substr(1) == "assine") {
 	var string1 = "Vamos concluir sua assinatura! Responde pra mim, por favor?";
-} else {
+	var string2 = "Qual é o pacote que você quer contratar?";
+} else if(window.location.hash.substr(1) == "teste") {
 	var string1 = "Quer um teste? Você só precisa responder umas perguntinhas ok?"
+	var string2 = "Qual é o pacote que você quer testar?";
+} else {
+	var string1 = "Quer fazer seu cadastro? Ok, vamos lá:"
+	var string2 = "Qual é o pacote que você tem interesse?";
 }
 </script>
 <div class="container">  
@@ -241,16 +246,25 @@ if(window.location.hash.substr(1) == "assine") {
       <input placeholder="E qual o seu email?" type="email" tabindex="2" required>
     </fieldset>
     <fieldset>
-      <input id="txttelefone" placeholder="Qual o numero do seu WhatsApp?" type="tel" tabindex="3" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
+      <input id="txttelefone" placeholder="Qual o número do seu WhatsApp?" type="tel" tabindex="3" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
     </fieldset>
 	<fieldset>
 		<select required tabindex="4" >
-		  <option value="" disabled selected hidden>Qual é o pacote que você quer contratar?</option>
+		  <option value="" disabled selected hidden><script>document.write(string2);</script></option>
 		  <option value="0">Plano Básico SD - 125 canais</option>
 		  <option value="1">Plano Na Medida HD - 250 canais</option>
 		  <option value="2">Plano Premium HD - 500 canais</option>
 		</select>
 	</fieldset>
+	<script>
+	if(window.location.hash.substr(1) == "teste") {
+		document.write("
+		<fieldset>
+		  <textarea placeholder="Porque se interessou pelo nosso serviço?" tabindex="5"></textarea>
+		</fieldset>
+		");
+	}
+	</script>
 	<fieldset>
 		<select required tabindex="4" >
 		  <option value="" disabled selected hidden>Qual metodo de pagamento quer usar?</option>
