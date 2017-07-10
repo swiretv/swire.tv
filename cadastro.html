@@ -219,6 +219,12 @@ fieldset {
 
 :-ms-input-placeholder {
   color: #888;
+  
+.ishidden {
+    opacity: 0;
+    height: 0;
+    visibility: hidden;
+}
 </style>
 
 </head>
@@ -256,15 +262,7 @@ if(window.location.hash.substr(1) == "assine") {
 		  <option value="2">Plano Premium HD - 500 canais</option>
 		</select>
 	</fieldset>
-	<script>
-	if(window.location.hash.substr(1) == "teste") {
-		document.write('		<fieldset>
-		  <textarea placeholder="Porque se intere'
- +'ssou pelo nosso serviço?" tabindex="5"></textarea>
-		</fieldset>');
-	}
-	</script>
-	<fieldset>
+	<fieldset class="assine">
 		<select required tabindex="4" >
 		  <option value="" disabled selected hidden>Qual metodo de pagamento quer usar?</option>
 		  <option value="0">Boleto Bancário</option>
@@ -290,7 +288,11 @@ if(window.location.hash.substr(1) == "assine") {
 jQuery(document).ready(function($){
   $("#txttelefone").mask("(00) 00000-0000");
 });
-
+</script>
+<script>
+if(window.location.hash.substr(1) != "assine") {
+	$(".assine").addClass('ishidden');
+} 
 </script>
 </body>
 </html>
