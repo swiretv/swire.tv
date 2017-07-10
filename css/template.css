@@ -2663,7 +2663,7 @@ a {
   color: #252525;
 }
 .bg--dark {
-  background: #1c1e21;
+  background: #1b1b1b;
 }
 .bg--dark:not(.nav-bar):not(.bar) {
   color: #ffffff;
@@ -2689,7 +2689,7 @@ a {
   background: #eaeaea;
 }
 .bg--primary {
-  background: #000000;
+  background: #1f0000;
 }
 .bg--primary p,
 .bg--primary span,
@@ -3802,7 +3802,7 @@ section.bg--dark + section.bg--dark {
   padding-top: 0;
 }
 section.bg--dark:last-of-type + footer.bg--dark {
-  background: #1b1b1b;
+  background: #101010;
 }
 section.border--bottom:not([data-gradient-bg]) {
   border-bottom: 1px solid #ececec;
@@ -6037,7 +6037,7 @@ a.block:hover > .feature {
   margin: 1.57575757575758em 0;
 }
 .cta-2.bg--primary:hover {
-  background: #080808;
+  background: #290000;
 }
 .cta-2:hover {
   background: #ffffff;
