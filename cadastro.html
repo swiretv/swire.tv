@@ -374,10 +374,9 @@ if(pageType != "assine") {
 jQuery('#contact').on('submit', function(ev){
 	jQuery("#txttelefone").prop('required',"true");
     ev.preventDefault();
-    jQuery.ajax({
+    jQuery.post({
         url: "http://minha.swire.tv/api/register",
-        type: 'POST',
-        data: "{'name':'" + jQuery('#formname').val() + "', 'email':'" + jQuery('#formmail').val()+ "', 'phone':'" + jQuery('#formphone').val()+ "', 'plan':'"+jQuery('#formplan').val()+ "', 'payment':'" + jQuery('#formpay').val()+ "', 'howfind':'" + jQuery('#formhowfind').val()+"'}",
+		data: {name: jQuery('#formname').val(), email: jQuery('#formmail').val(), phone: jQuery('#formphone').val(), plan: jQuery('#formplan').val(), payment: jQuery('#formpay').val(), howfind: jQuery('#formhowfind').val()},
         success: function(msg){
             jQuery('.container').html("Enviando...");
         },
