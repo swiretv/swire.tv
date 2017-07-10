@@ -370,6 +370,9 @@ if(pageType != "assine") {
 } else {
 	jQuery("fieldset.product select").val(productType);
 }
+if(pageType != "assine" && pageType != "teste") {
+	var pageType = "default";
+}
 
 jQuery('#contact').on('submit', function(ev){
 	jQuery("#txttelefone").prop('required',"true");
