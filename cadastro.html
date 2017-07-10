@@ -323,7 +323,7 @@ function removeHash() {
       <input placeholder="E qual o seu email?" type="email" tabindex="2" required>
     </fieldset>
     <fieldset>
-      <input id="txttelefone" placeholder="Qual o número do seu WhatsApp?" type="tel" tabindex="3" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}" required>
+      <input id="txttelefone" placeholder="Qual o número do seu WhatsApp?" type="tel" tabindex="3" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
     </fieldset>
 	<fieldset class="product">
 		<select required tabindex="4" >
@@ -372,6 +372,7 @@ if(pageType != "assine") {
 }
 
 jQuery('#contact').on('submit', function(ev){
+	jQuery("#txttelefone").prop('required',"true");
     ev.preventDefault();
     jQuery.ajax({
         url: "http://minha.swire.tv/api/register",
