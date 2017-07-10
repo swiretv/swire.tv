@@ -1,13 +1,13 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:url" content="https://swire.tv">
-<meta property="og:title" content="SwireTV - Sua solução em TV por Assinatura!">
+<meta property="og:title" content="SwireTV - Sua soluÃ§Ã£o em TV por Assinatura!">
 <meta property="og:site_name" content="SwireTV">
-<meta property="og:description" content="Que tal conhecer agora a sua nova solução em TV por assinatura?">
+<meta property="og:description" content="Que tal conhecer agora a sua nova soluÃ§Ã£o em TV por assinatura?">
 <meta property="og:image" content="https://swire.tv/images/og.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
 <meta name="application-name" content="SwireTV">
 <meta name="msapplication-config" content="/icons/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
-<title>SwireTV - Sua solução em TV por Assinatura!</title>
+<title>SwireTV - Sua soluÃ§Ã£o em TV por Assinatura!</title>
 <meta name="robots" content="noindex,follow">
 <meta name="viewport" content="width=device-width" />
 
@@ -223,12 +223,19 @@ fieldset {
 
 </head>
 <body>
+<script>
+if(window.location.hash.substr(1) == "assine") {
+	var string1 = "Vamos concluir sua assinatura! Responde pra mim, por favor?";
+} else {
+	var string1 = "Quer um teste? VocÃª sÃ³ precisa responder umas perguntinhas ok?"
+}
+</script>
 <div class="container">  
   <form id="contact" action="" method="post">
     <img class="logo" src="images/swirelogo.png" alt="">
-    <h4><script>document.write("Vamos concluir sua assinatura! Responde pra mim, por favor?");</script></h4>
+    <h4><script>document.write(string1);</script></h4>
     <fieldset>
-      <input placeholder="Qual é o seu nome?" type="text" tabindex="1" required autofocus>
+      <input placeholder="Qual Ã© o seu nome?" type="text" tabindex="1" required autofocus>
     </fieldset>
     <fieldset>
       <input placeholder="E qual o seu email?" type="email" tabindex="2" required>
@@ -238,8 +245,8 @@ fieldset {
     </fieldset>
 	<fieldset>
 		<select required tabindex="4" >
-		  <option value="" disabled selected hidden>Qual é o pacote que você quer contratar?</option>
-		  <option value="0">Plano Básico SD - 125 canais</option>
+		  <option value="" disabled selected hidden>Qual Ã© o pacote que vocÃª quer contratar?</option>
+		  <option value="0">Plano BÃ¡sico SD - 125 canais</option>
 		  <option value="1">Plano Na Medida HD - 250 canais</option>
 		  <option value="2">Plano Premium HD - 500 canais</option>
 		</select>
@@ -247,9 +254,9 @@ fieldset {
 	<fieldset>
 		<select required tabindex="4" >
 		  <option value="" disabled selected hidden>Qual metodo de pagamento quer usar?</option>
-		  <option value="0">Boleto Bancário</option>
-		  <option value="1">Cartão de Crédito</option>
-		  <option value="2">Transferência Bancária</option>
+		  <option value="0">Boleto BancÃ¡rio</option>
+		  <option value="1">CartÃ£o de CrÃ©dito</option>
+		  <option value="2">TransferÃªncia BancÃ¡ria</option>
 		  <option value="3">PagSeguro</option>
 		  <option value="4">Mercado Pago</option>
 		  <option value="5">PayPal</option>
