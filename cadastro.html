@@ -27,6 +27,7 @@
 <title>SwireTV - Sua solução em TV por Assinatura!</title>
 <meta name="robots" content="noindex,follow">
 <meta name="viewport" content="width=device-width" />
+<noscript><meta http-equiv="refresh" content="0;url=http://www.enable-javascript.com/pt/"></noscript>
 
 <style>
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,300,600,400italic);
@@ -49,9 +50,9 @@ body {
   font-size: 12px;
   line-height: 30px;
   color: #777;
-  background-image: url(images/image1.jpg);
-  background-repeat: no-repeat;
+  background: url(images/image1.jpg) no-repeat center center fixed;
   background-size: cover;
+  overflow:hidden;
 }
 
 .container {
@@ -59,6 +60,13 @@ body {
   width: 100%;
   margin: 0 auto;
   position: relative;
+}
+
+.ishidden {
+    opacity: 0;
+    height: 0;
+    visibility: hidden;
+	margin: 0 0 0px;
 }
 
 @media screen and (max-width: 900px) {
@@ -219,26 +227,80 @@ fieldset {
 
 :-ms-input-placeholder {
   color: #888;
-  
-.ishidden {
-    opacity: 0;
-    height: 0;
-    visibility: hidden;
-}
 </style>
 
 </head>
 <body>
 <script>
-if(window.location.hash.substr(1) == "assine") {
+if(window.location.hash.substr(1) == "assine?plano=0"){
+	var pageType = "assine";
+	var productType = "0";
+	fbq('track', 'ViewContent', {
+		content_ids: ['1000'],
+		content_type: 'product',
+		value: 20.00,
+		currency: 'BRL'
+	});
+	fbq('track', 'AddToCart', {
+		content_ids: ['1000'],
+		content_type: 'product',
+		value: 20.00,
+		currency: 'BRL'
+	});
+
+} else if(window.location.hash.substr(1) == "assine?plano=1"){
+	var pageType = "assine";
+	var productType = "1";
+	fbq('track', 'ViewContent', {
+		content_ids: ['1001'],
+		content_type: 'product',
+		value: 30.00,
+		currency: 'BRL'
+	});
+	fbq('track', 'AddToCart', {
+		content_ids: ['1001'],
+		content_type: 'product',
+		value: 30.00,
+		currency: 'BRL'
+	});
+	
+} else if(window.location.hash.substr(1) == "assine?plano=2"){
+	var pageType = "assine";
+	var productType = "2";
+	fbq('track', 'ViewContent', {
+		content_ids: ['1000'],
+		content_type: 'product',
+		value: 50.00,
+		currency: 'BRL'
+	});
+	fbq('track', 'AddToCart', {
+		content_ids: ['1000'],
+		content_type: 'product',
+		value: 50.00,
+		currency: 'BRL'
+	});
+} else {
+	var pageType = window.location.hash.substr(1);
+}
+removeHash();
+
+
+if(pageType == "assine") {
 	var string1 = "Vamos concluir sua assinatura! Responde pra mim, por favor?";
 	var string2 = "Qual é o pacote que você quer contratar?";
-} else if(window.location.hash.substr(1) == "teste") {
+	var string3 = "Assine agora!";
+} else if(pageType == "teste") {
 	var string1 = "Quer um teste? Você só precisa responder umas perguntinhas ok?"
 	var string2 = "Qual é o pacote que você quer testar?";
+	var string3 = "Pedir meu teste!";
 } else {
 	var string1 = "Quer fazer seu cadastro? Ok, vamos lá:"
 	var string2 = "Qual é o pacote que você tem interesse?";
+	var string3 = "Fazer meu cadastro!";
+}
+
+function removeHash() { 
+    history.pushState("", document.title, window.location.pathname + window.location.search);
 }
 </script>
 <div class="container">  
@@ -252,9 +314,9 @@ if(window.location.hash.substr(1) == "assine") {
       <input placeholder="E qual o seu email?" type="email" tabindex="2" required>
     </fieldset>
     <fieldset>
-      <input id="txttelefone" placeholder="Qual o número do seu WhatsApp?" type="tel" tabindex="3" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}">
+      <input id="txttelefone" placeholder="Qual o número do seu WhatsApp?" type="tel" tabindex="3" pattern="\([0-9]{2}\)[\s][0-9]{4,5}-[0-9]{4}" required>
     </fieldset>
-	<fieldset>
+	<fieldset class="product">
 		<select required tabindex="4" >
 		  <option value="" disabled selected hidden><script>document.write(string2);</script></option>
 		  <option value="0">Plano Básico SD - 125 canais</option>
@@ -263,7 +325,7 @@ if(window.location.hash.substr(1) == "assine") {
 		</select>
 	</fieldset>
 	<fieldset class="assine">
-		<select required tabindex="4" >
+		<select id="assinerq" required tabindex="5" >
 		  <option value="" disabled selected hidden>Qual metodo de pagamento quer usar?</option>
 		  <option value="0">Boleto Bancário</option>
 		  <option value="1">Cartão de Crédito</option>
@@ -277,7 +339,10 @@ if(window.location.hash.substr(1) == "assine") {
 		</select>
 	</fieldset>
     <fieldset>
-      <button name="submit" type="submit" id="contact-submit">Contratar agora!</button>
+      <textarea placeholder="Porque se interessou pelo nosso serviço? (opcional)" tabindex="6"></textarea>
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="contact-submit"><script>document.write(string3);</script></button>
     </fieldset>
   </form>
 </div>
@@ -290,12 +355,27 @@ jQuery(document).ready(function($){
 });
 </script>
 <script>
-jQuery(document).ready(function(){
-	if(window.location.hash.substr(1) != "assine") {
-		$(".assine").addClass('ishidden');
-	} 
-});
+if(pageType != "assine") {
+	jQuery(".assine").addClass('ishidden');
+	jQuery("#assinerq").prop('required',null);
+} else {
+	jQuery("fieldset.product select").val(productType);
+}
 
+jQuery('#contact').on('submit', function(ev){
+    ev.preventDefault();
+    jQuery.ajax({
+        url: "http://minha.swire.tv/api/register",
+        type: 'POST',
+        data: jQuery('#contact').serialize(),
+        success: function(msg){
+            jQuery('.container').html("Enviando...");
+        },
+        error: function() {
+            alert("Bad submit");
+        }
+    });
+});
 </script>
 </body>
 </html>
