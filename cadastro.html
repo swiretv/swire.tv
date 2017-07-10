@@ -376,7 +376,7 @@ jQuery('#contact').on('submit', function(ev){
     ev.preventDefault();
     jQuery.post({
         url: "http://minha.swire.tv/api/register",
-		data: {name: jQuery('#formname').val(), email: jQuery('#formmail').val(), phone: jQuery('#formphone').val(), plan: jQuery('#formplan').val(), payment: jQuery('#formpay').val(), howfind: jQuery('#formhowfind').val()},
+		data: {name: jQuery('#formname').val(), email: jQuery('#formmail').val(), phone: jQuery('#formphone').val(), plan: jQuery('#formplan').val(), payment: jQuery('#formpay').val(), howfind: jQuery('#formhowfind').val(), type: pageType},
         success: function(msg){
             jQuery('.container').html("Enviando...");
         },
