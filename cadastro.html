@@ -400,7 +400,7 @@ jQuery('#contact').on('submit', function(ev){
 				var res = msg.split("|");
 				if(res[0] == "true") {
 					sent = 1;
-					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo?</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern="\{5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
+					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo?</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern=".{5,5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
 				} else {
 					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
 				}
@@ -434,7 +434,7 @@ jQuery('#contact').on('submit', function(ev){
 		ev.preventDefault();
 		jQuery.post({
 			url: "api/setpassword",
-			data: {email: emails, token: "savedtoken", password: sha256(jQuery('#formpassword').val())},
+			data: {email: emailp, token: token, password: sha256(jQuery('#formpassword').val())},
 			success: function(msg){
 				var res = msg.split("|");
 				if(res[0] == "true") {
