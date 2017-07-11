@@ -115,6 +115,7 @@ select:invalid {
 #contact input[type="email"],
 #contact input[type="tel"],
 #contact input[type="url"],
+#contact input[type="password"],
 #contact textarea,
 #contact button[type="submit"] {
   font: 400 13px/16px "Roboto", Helvetica, Arial, sans-serif;
@@ -165,6 +166,7 @@ fieldset {
 #contact input[type="email"],
 #contact input[type="tel"],
 #contact input[type="url"],
+#contact input[type="password"],
 #contact textarea {
   width: 100%;
   border: 1px solid #ccc;
@@ -177,6 +179,7 @@ fieldset {
 #contact input[type="email"]:hover,
 #contact input[type="tel"]:hover,
 #contact input[type="url"]:hover,
+#contact input[type="password"]:hover,
 #contact textarea:hover {
   -webkit-transition: border-color 0.3s ease-in-out;
   -moz-transition: border-color 0.3s ease-in-out;
@@ -303,7 +306,7 @@ if(pageType == "assine") {
 	var string2 = "Qual é o pacote que você quer testar?";
 	var string3 = "Pedir meu teste!";
 } else {
-	var string1 = "Quer fazer seu cadastro? Ok, vamos lá:"
+	var string1 = "Vamos fazer seu cadastro! Você só precisa responder aqui, blz?"
 	var string2 = "Qual é o pacote que você tem interesse?";
 	var string3 = "Fazer meu cadastro!";
 }
@@ -315,7 +318,7 @@ function removeHash() {
 <div class="container">  
   <form id="contact" action="" method="post">
     <img class="logo" src="images/swirelogo.png" alt="">
-    <h4><script>document.write(string1);</script></h4>
+    <div id="content"><h4><script>document.write(string1);</script></h4>
     <fieldset>
       <input id="formname" placeholder="Qual é o seu nome?" type="text" tabindex="1" required autofocus>
     </fieldset>
@@ -353,11 +356,13 @@ function removeHash() {
     <fieldset>
       <button name="submit" type="submit" id="contact-submit"><script>document.write(string3);</script></button>
     </fieldset>
+	</div>
   </form>
 </div>
 
 <script type="text/javascript" src="js/jquery.min.js"/></script>
 <script type="text/javascript" src="js/jquery.mask.min.js"/></script>
+<script type="text/javascript" src="js/sha256.min.js"/></script>
 <script type="text/javascript">
 jQuery(document).ready(function($){
   $("#formphone").mask("(00) 00000-0000");
@@ -373,21 +378,73 @@ if(pageType != "assine") {
 if(pageType != "assine" && pageType != "teste") {
 	var pageType = "default";
 }
+var sent = 0;
 
+var token;
 jQuery('#contact').on('submit', function(ev){
-	jQuery("#txttelefone").prop('required',"true");
-    ev.preventDefault();
-    jQuery.post({
-        url: "http://minha.swire.tv/api/register",
-		data: {name: jQuery('#formname').val(), email: jQuery('#formmail').val(), phone: jQuery('#formphone').val(), plan: jQuery('#formplan').val(), payment: jQuery('#formpay').val(), howfind: jQuery('#formhowfind').val(), type: pageType},
-        success: function(msg){
-            jQuery('.container').html("Enviando...");
-        },
-        error: function() {
-            alert("Bad submit");
-        }
-    });
+	var emails = jQuery('#formmail').val();
+	if(sent == "0"){
+		jQuery("#txttelefone").prop('required',"true");
+		ev.preventDefault();
+		jQuery('#content').html('<h4 style="text-align:center;">Enviando...</h4>');
+		jQuery.post({
+			url: "api/register",
+			data: {name: jQuery('#formname').val(), email: jQuery('#formmail').val(), phone: jQuery('#formphone').val(), plan: jQuery('#formplan').val(), payment: jQuery('#formpay').val(), howfind: jQuery('#formhowfind').val(), type: pageType},
+			success: function(msg){
+				var res = msg.split("|");
+				if(res[0] == "true") {
+					sent = 1;
+					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo?</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern="\{5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
+				} else {
+					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+				}
+			},
+			error: function() {
+				jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+			}
+		});
+	} else if(sent == "1") {
+		ev.preventDefault();
+		jQuery('#content').html('<h4 style="text-align:center;">Enviando o código...</h4>');
+		jQuery.post({
+			url: "api/codeverification",
+			data: {email: emails, code: jQuery('#formcode').val()},
+			success: function(msg){
+				var res = msg.split("|");
+				if(res[0] == "true") {
+					token = res[1];
+					sent = 2;
+					jQuery('#content').html('<h4>Agora, pode escolher uma senha para sua conta:</h4><fieldset><input id="formpassword" placeholder="Escolha uma senha" type="password" tabindex="1" required autofocus></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Terminar meu cadastro!</button></fieldset>');
+				} else {
+					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+				}
+			},
+			error: function() {
+				jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+			}
+		});
+	} else if(sent == "2") {
+		ev.preventDefault();
+		jQuery('#content').html('<h4 style="text-align:center;">Enviando o código...</h4>');
+		jQuery.post({
+			url: "api/setpassword",
+			data: {email: emails, token: "savedtoken", password: sha256(jQuery('#formpassword').val())},
+			success: function(msg){
+				var res = msg.split("|");
+				if(res[0] == "true") {
+					sent = 3;
+					jQuery('#content').html('<h4>Terminamos! (EM CONSTRUÇÃO)</h4>');
+				} else {
+					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+				}	
+			},
+			error: function() {
+				jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+			}
+		});
+	}
 });
+
 </script>
 <!-- BEGIN JIVOSITE CODE {literal} -->
 <script type='text/javascript'>

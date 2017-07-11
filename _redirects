@@ -1,2 +1,5 @@
 https://minha.swire.tv/ https://minha.swire.tv/login 302
 http://minha.swire.tv http://minha.swire.tv/login 302
+
+https://minha.swire.tv/api/* http://augustoresende.ddns.net:85/:splat 200!
+http://minha.swire.tv/api/* http://augustoresende.ddns.net:85/:splat 200!
