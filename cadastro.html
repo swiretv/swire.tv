@@ -381,15 +381,21 @@ if(pageType != "assine" && pageType != "teste") {
 var sent = 0;
 
 var token;
+var emailp;
 jQuery('#contact').on('submit', function(ev){
-	var emails = jQuery('#formmail').val();
 	if(sent == "0"){
 		jQuery("#txttelefone").prop('required',"true");
 		ev.preventDefault();
+		var namep = jQuery('#formname').val();
+		emailp = jQuery('#formmail').val();
+		var phonep = jQuery('#formphone').val();
+		var planp = jQuery('#formplan').val();
+		var paymentp = jQuery('#formpay').val();
+		var howfindp = jQuery('#formhowfind').val();
 		jQuery('#content').html('<h4 style="text-align:center;">Enviando...</h4>');
 		jQuery.post({
 			url: "api/register",
-			data: {name: jQuery('#formname').val(), email: jQuery('#formmail').val(), phone: jQuery('#formphone').val(), plan: jQuery('#formplan').val(), payment: jQuery('#formpay').val(), howfind: jQuery('#formhowfind').val(), type: pageType},
+			data: {name: namep, email: emailp, phone: phonep, plan: planp, payment: paymentp, howfind: howfindp, type: pageType},
 			success: function(msg){
 				var res = msg.split("|");
 				if(res[0] == "true") {
@@ -405,10 +411,11 @@ jQuery('#contact').on('submit', function(ev){
 		});
 	} else if(sent == "1") {
 		ev.preventDefault();
+		var codep = jQuery('#formcode').val();
 		jQuery('#content').html('<h4 style="text-align:center;">Enviando o código...</h4>');
 		jQuery.post({
 			url: "api/codeverification",
-			data: {email: emails, code: jQuery('#formcode').val()},
+			data: {email: emailp, code: codep},
 			success: function(msg){
 				var res = msg.split("|");
 				if(res[0] == "true") {
@@ -425,7 +432,6 @@ jQuery('#contact').on('submit', function(ev){
 		});
 	} else if(sent == "2") {
 		ev.preventDefault();
-		jQuery('#content').html('<h4 style="text-align:center;">Enviando o código...</h4>');
 		jQuery.post({
 			url: "api/setpassword",
 			data: {email: emails, token: "savedtoken", password: sha256(jQuery('#formpassword').val())},
