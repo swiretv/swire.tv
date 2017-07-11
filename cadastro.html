@@ -199,22 +199,18 @@ jQuery('#contact').on('submit', function(ev){
 							success: function(msg){
 								var res = msg.split("|");
 								if(res[0] == "true") {
-									sent = 3;
-									if(pageType == "teste"){
-										jQuery('#content').html('<h4>Estamos gerando o seu teste! Aguarde...</h4>');
-										
-									}
-									jQuery('#content').html('<h4>Terminamos! (EM CONSTRUÇÃO)</h4>');
+									jQuery('#content').html('<h4>Terminamos! Aqui o link do seu teste: '+res[1]+'</h4>');
 								} else {
 									jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
-								}	
+								}
 							},
 							error: function() {
 								jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
 							}
 						});
+					} else {
+						jQuery('#content').html('<h4>Terminamos! (EM CONSTRUÇÃO)</h4>');
 					}
-					jQuery('#content').html('<h4>Terminamos! (EM CONSTRUÇÃO)</h4>');
 				} else {
 					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
 				}	
