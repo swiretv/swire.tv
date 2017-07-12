@@ -1,4 +1,4 @@
-http://minha.swire.tv/* https://minha.swire.tv/:splat 301
+http://minha.swire.tv/* https://minha.swire.tv/:splat 301!
 
 https://minha.swire.tv/ https://minha.swire.tv/login 302
 http://minha.swire.tv http://minha.swire.tv/login 302
