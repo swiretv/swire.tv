@@ -20,7 +20,6 @@ body {
   color: #777;
   background: url(/images/image1.jpg) no-repeat center center fixed;
   background-size: cover;
-  overflow:hidden;
 }
 
 .container {
