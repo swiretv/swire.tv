@@ -134,8 +134,8 @@ var emailp;
 var planp;
 jQuery('#contact').on('submit', function(ev){
 	if(sent == "0"){
-		jQuery("#formphone").prop('required',"true");
 		ev.preventDefault();
+		jQuery("#formphone").prop('required',"true");
 		var namep = jQuery('#formname').val();
 		emailp = jQuery('#formmail').val();
 		var phonep = jQuery('#formphone').val();
