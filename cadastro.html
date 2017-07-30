@@ -142,7 +142,7 @@ jQuery('#contact').on('submit', function(ev){
 		planp = jQuery('#formplan').val();
 		var paymentp = jQuery('#formpay').val();
 		var howfindp = jQuery('#formhowfind').val();
-		jQuery('#content').html('<h4 style="text-align:center;">Enviando...</h4>');
+		jQuery('#content').html('<h4 style="text-align:center;">Enviando... Aguarde!</h4>');
 		jQuery.post({
 			url: "api/register",
 			data: {name: namep, email: emailp, phone: phonep, plan: planp, payment: paymentp, howfind: howfindp, type: pageType},
@@ -150,7 +150,7 @@ jQuery('#contact').on('submit', function(ev){
 				var res = msg.split("|");
 				if(res[0] == "true") {
 					sent = 1;
-					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo?</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern=".{5,5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
+					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo? (Não feche essa tela, se não conseguir confirmar o cadastro, não tem problema, logo irei chamar no whatsapp para continuar seu cadastro)</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern=".{5,5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
 				} else {
 					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
 				}
