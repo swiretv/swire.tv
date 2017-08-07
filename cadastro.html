@@ -31,10 +31,23 @@
 <script>!function(e,t,n,c,o,a,f){e.fbq||(o=e.fbq=function(){o.callMethod?o.callMethod.apply(o,arguments):o.queue.push(arguments)},e._fbq||(e._fbq=o),o.push=o,o.loaded=!0,o.version="2.0",o.queue=[],(a=t.createElement(n)).async=!0,a.src="https://connect.facebook.net/en_US/fbevents.js",(f=t.getElementsByTagName(n)[0]).parentNode.insertBefore(a,f))}(window,document,"script"),fbq("init","707310706126458"),fbq("track","PageView");</script>
 <noscript><meta http-equiv="refresh" content="0;url=http://www.enable-javascript.com/pt/"></noscript>
 <script>
-if(window.location.hash.substr(1) == "assine?plano=0"){
+// Pegar informações da URL fornecida!
+if(window.location.hash.substr(1).split("=")[0] == "assine?plano"){
+	var pageType = "assine";
+	var productType = window.location.hash.substr(1).split("=")[1];
+} else if(window.location.hash.substr(1).split("=")[0] == "verify?email"){
+	var pageType = "verify";
+	var emailVerify = window.location.hash.substr(1).split("=")[1].split("&")[0];
+	var codeVerify = window.location.hash.substr(1).split("=")[2];
+} else {
+	var pageType = window.location.hash.substr(1);
+}
+history.pushState("", document.title, window.location.pathname + window.location.search);
+
+/* if(window.location.hash.substr(1) == "assine?plano=0"){
 	var pageType = "assine";
 	var productType = "0";
-	fbq("track","ViewContent",{content_ids:["1000"],content_type:"product",value:20,currency:"BRL"}),fbq("track","AddToCart",{content_ids:["1000"],content_type:"product",value:20,currency:"BRL"});
+	fbq("track","ViewContent",{content_ids:["1000"],content_type:"product",value:20,currency:"BRL"}),fbq("track","AddToCart",{content_ids:["1000"],content_type:"product",value:20,currency:"BRL"}); 
 } else if(window.location.hash.substr(1) == "assine?plano=1"){
 	var pageType = "assine";
 	var productType = "1";
@@ -49,13 +62,9 @@ if(window.location.hash.substr(1) == "assine?plano=0"){
 	var codeVerify = window.location.hash.substr(1).split("=")[2];
 } else {
 	var pageType = window.location.hash.substr(1);
-}
-console.log(window.location.hash.substr(1).split("=")[0]);
-console.log(pageType);
-console.log(emailVerify);
-console.log(codeVerify);
+} */
 
-history.pushState("", document.title, window.location.pathname + window.location.search);
+//Setar textos dependendo da "call"
 if(pageType == "assine") {
 	var string1 = "Vamos concluir sua assinatura! Responde pra mim, por favor?";
 	var string2 = "Qual é o pacote que você quer contratar?";
@@ -148,13 +157,14 @@ if(pageType == "verify") {
 	});
 }
 
+//Remover campo metodo de pagamento se não for assinar...
 if(pageType != "assine") {
 	jQuery(".assine").addClass('ishidden');
 	jQuery("#formpay").prop('required',null);
 } else {
 	jQuery("fieldset.product select").val(productType);
 }
-if(pageType != "assine" && pageType != "teste") {
+if(pageType != "assine" && pageType != "teste" && pageType != "verify") {
 	var pageType = "default";
 }
 var sent = 0;
@@ -163,8 +173,8 @@ var token;
 var emailp;
 var planp;
 jQuery('#contact').on('submit', function(ev){
+	ev.preventDefault();
 	if(sent == "0"){
-		ev.preventDefault();
 		jQuery("#formphone").prop('required',"true");
 		var namep = jQuery('#formname').val();
 		emailp = jQuery('#formmail').val();
@@ -182,16 +192,14 @@ jQuery('#contact').on('submit', function(ev){
 					sent = 1;
 					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo?</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern=".{5,5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
 				} else {
-					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+					jQuery('#content').html('<h4>Erro inesperado! Favor chamar o suporte!</h4>');
 				}
 			},
 			error: function() {
-				jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+				jQuery('#content').html('<h4>Erro inesperado! Favor chamar o suporte!</h4>');
 			}
 		});
-
 	} else if(sent == "1") {
-		ev.preventDefault();
 		var codep = jQuery('#formcode').val();
 		jQuery('#content').html('<h4 style="text-align:center;">Enviando o código...</h4>');
 		jQuery.post({
@@ -204,16 +212,14 @@ jQuery('#contact').on('submit', function(ev){
 					sent = 2;
 					jQuery('#content').html('<h4>Agora, pode criar uma senha para sua conta:</h4><fieldset><input id="formpassword" placeholder="Digite sua nova senha aqui!" type="password" tabindex="1" required autofocus></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Terminar meu cadastro!</button></fieldset>');
 				} else {
-					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+					jQuery('#content').html('<h4>Erro inesperado! Favor chamar o suporte!</h4>');
 				}
 			},
 			error: function() {
-				jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+				jQuery('#content').html('<h4>Erro inesperado! Favor chamar o suporte!</h4>');
 			}
 		});
-
 	} else if(sent == "2") {
-		ev.preventDefault();
 		jQuery.post({
 			url: "api/setpassword",
 			data: {email: emailp, token: token, password: sha256(jQuery('#formpassword').val())},
@@ -222,7 +228,8 @@ jQuery('#contact').on('submit', function(ev){
 				if(res[0] == "true") {
 					sent = 3;
 					if(pageType == "teste"){
-						jQuery('#content').html('<h4>Você concluiu seu cadastro! Daqui a pouco iremos lhe chamar no WhatsApp cadastrado!</h4>');
+						jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
+						//<h4>Onde quer assistir a SwireTV?</h4><fieldset><select id="formassistir" required><option value="" disabled selected hidden>Escolha aqui...</option><option value="0">Computador</option><option value="1">Android (Celular ou Tablet)</option><option value="2">iPhone</option><option value="3">SmartTV - Samsung</option><option value="4">SmartTV - LG</option><option value="5">SmartTV - Phillips</option><option value="6">Android TV Box</option><option value="7">XBox One</option></select></fieldset>
 /**						jQuery.post({
 							url: "api/gentrial",
 							data: {email: emailp, token: token, plan: planp},
@@ -239,7 +246,7 @@ jQuery('#contact').on('submit', function(ev){
 							}
 						}); **/
 					} else {
-						jQuery('#content').html('<h4>Você concluiu seu cadastro! Daqui a pouco iremos lhe chamar no WhatsApp cadastrado!</h4>');
+						jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 					}
 				} else {
 					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
