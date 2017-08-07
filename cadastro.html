@@ -43,9 +43,15 @@ if(window.location.hash.substr(1) == "assine?plano=0"){
 	var pageType = "assine";
 	var productType = "2";
 	fbq("track","ViewContent",{content_ids:["1002"],content_type:"product",value:50,currency:"BRL"}),fbq("track","AddToCart",{content_ids:["1002"],content_type:"product",value:50,currency:"BRL"});
+} else if(window.location.hash.substr(1).split("=")[0] == "verify?email"){
+	var pageType = "verify";
+	var emailVerify = window.location.hash.substr(1).split("=")[1].split("&")[0];
+	var codeVerify = window.location.hash.substr(1).split("=")[2];
 } else {
 	var pageType = window.location.hash.substr(1);
 }
+
+
 history.pushState("", document.title, window.location.pathname + window.location.search);
 if(pageType == "assine") {
 	var string1 = "Vamos concluir sua assinatura! Responde pra mim, por favor?";
@@ -129,6 +135,27 @@ if(pageType != "assine" && pageType != "teste") {
 }
 var sent = 0;
 
+if(pageType == "verify") {
+	jQuery('#content').html('<h4 style="text-align:center;">Enviando o código...</h4>');
+	jQuery.post({
+		url: "api/codeverification",
+		data: {email: emailVerify, code: codeVerify},
+		success: function(msg){
+			var res = msg.split("|");
+			if(res[0] == "true") {
+				token = res[1];
+				sent = 2;
+				jQuery('#content').html('<h4>Agora, pode criar uma senha para sua conta:</h4><fieldset><input id="formpassword" placeholder="Digite sua nova senha aqui!" type="password" tabindex="1" required autofocus></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Terminar meu cadastro!</button></fieldset>');
+			} else {
+				jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+			}
+		},
+		error: function() {
+			jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+		}
+	});
+}
+
 var token;
 var emailp;
 var planp;
@@ -150,7 +177,7 @@ jQuery('#contact').on('submit', function(ev){
 				var res = msg.split("|");
 				if(res[0] == "true") {
 					sent = 1;
-					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo? (Não feche essa tela, se não conseguir confirmar o cadastro, não tem problema, logo irei chamar no whatsapp para continuar seu cadastro)</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern=".{5,5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
+					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo?</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern=".{5,5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
 				} else {
 					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
 				}
