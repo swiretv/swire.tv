@@ -50,7 +50,10 @@ if(window.location.hash.substr(1) == "assine?plano=0"){
 } else {
 	var pageType = window.location.hash.substr(1);
 }
-
+console.log(window.location.hash.substr(1).split("=")[0]);
+console.log(pageType);
+console.log(emailVerify);
+console.log(codeVerify);
 
 history.pushState("", document.title, window.location.pathname + window.location.search);
 if(pageType == "assine") {
