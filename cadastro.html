@@ -127,17 +127,6 @@ jQuery(document).ready(function($){
 });
 </script>
 <script>
-if(pageType != "assine") {
-	jQuery(".assine").addClass('ishidden');
-	jQuery("#formpay").prop('required',null);
-} else {
-	jQuery("fieldset.product select").val(productType);
-}
-if(pageType != "assine" && pageType != "teste") {
-	var pageType = "default";
-}
-var sent = 0;
-
 if(pageType == "verify") {
 	jQuery('#content').html('<h4 style="text-align:center;">Enviando o código...</h4>');
 	jQuery.post({
@@ -158,6 +147,17 @@ if(pageType == "verify") {
 		}
 	});
 }
+
+if(pageType != "assine") {
+	jQuery(".assine").addClass('ishidden');
+	jQuery("#formpay").prop('required',null);
+} else {
+	jQuery("fieldset.product select").val(productType);
+}
+if(pageType != "assine" && pageType != "teste") {
+	var pageType = "default";
+}
+var sent = 0;
 
 var token;
 var emailp;
