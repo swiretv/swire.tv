@@ -98,9 +98,9 @@ if(pageType == "assine") {
 	<fieldset class="product">
 		<select id="formplan" required tabindex="4" >
 		  <option value="" disabled selected hidden><script>document.write(string2);</script></option>
-		  <option value="0">Plano Básico SD - 125 canais</option>
-		  <option value="1">Plano Na Medida HD - 250 canais</option>
-		  <option value="2">Plano Premium HD - 500 canais</option>
+		  <option value="0">Plano Básico SD - 250 canais</option>
+		  <option value="1">Plano Na Medida HD - 500 canais</option>
+		  <option value="2">Plano Premium HD - 1000 canais</option>
 		</select>
 	</fieldset>
 	<fieldset class="assine">
@@ -148,11 +148,11 @@ if(pageType == "verify") {
 				sent = 2;
 				jQuery('#content').html('<h4>Agora, pode criar uma senha para sua conta:</h4><fieldset><input id="formpassword" placeholder="Digite sua nova senha aqui!" type="password" tabindex="1" required autofocus></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Terminar meu cadastro!</button></fieldset>');
 			} else {
-				jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+				jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 			}
 		},
 		error: function() {
-			jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+			jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 		}
 	});
 }
@@ -192,11 +192,11 @@ jQuery('#contact').on('submit', function(ev){
 					sent = 1;
 					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo?</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern=".{5,5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
 				} else {
-					jQuery('#content').html('<h4>Erro inesperado! Favor chamar o suporte!</h4>');
+					jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 				}
 			},
 			error: function() {
-				jQuery('#content').html('<h4>Erro inesperado! Favor chamar o suporte!</h4>');
+				jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 			}
 		});
 	} else if(sent == "1") {
@@ -212,11 +212,11 @@ jQuery('#contact').on('submit', function(ev){
 					sent = 2;
 					jQuery('#content').html('<h4>Agora, pode criar uma senha para sua conta:</h4><fieldset><input id="formpassword" placeholder="Digite sua nova senha aqui!" type="password" tabindex="1" required autofocus></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Terminar meu cadastro!</button></fieldset>');
 				} else {
-					jQuery('#content').html('<h4>Erro inesperado! Favor chamar o suporte!</h4>');
+					jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 				}
 			},
 			error: function() {
-				jQuery('#content').html('<h4>Erro inesperado! Favor chamar o suporte!</h4>');
+				jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 			}
 		});
 	} else if(sent == "2") {
@@ -249,11 +249,11 @@ jQuery('#contact').on('submit', function(ev){
 						jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 					}
 				} else {
-					jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+					jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 				}	
 			},
 			error: function() {
-				jQuery('#content').html('<h4>Erro inesperado! Favor falar com o suporte!</h4>');
+				jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
 			}
 		});
 	}
