@@ -83,6 +83,7 @@ select:invalid {
   background: rgba(255, 255, 255, 0.9);
   padding: 25px;
   margin-top: 5vh !important;
+  margin-bottom: auto !important;
   margin: 20vh 0;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
