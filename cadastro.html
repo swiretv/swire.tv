@@ -103,6 +103,19 @@ if(pageType == "assine") {
 		  <option value="2">Plano Premium HD - 1000 canais</option>
 		</select>
 	</fieldset>
+	<fieldset>
+		<select id="formdevices" required>
+			<option value="" disabled selected hidden>Onde quer assistir a SwireTV?</option>
+			<option value="computador">Computador</option>
+			<option value="android">Android (Celular ou Tablet)</option>
+			<option value="iphone">iPhone</option>
+			<option value="samsung">SmartTV - Samsung</option>
+			<option value="lg">SmartTV - LG</option>
+			<option value="phillips">SmartTV - Phillips</option>
+			<option value="tvbox">TV Box Android</option>
+			<option value="outros">Outros</option>
+		</select>
+	</fieldset>
 	<fieldset class="assine">
 		<select id="formpay" required tabindex="5" >
 		  <option value="" disabled selected hidden>Qual metodo de pagamento quer usar?</option>
@@ -112,9 +125,6 @@ if(pageType == "assine") {
 		  <option value="3">PagSeguro</option>
 		  <option value="4">Mercado Pago</option>
 		  <option value="5">PayPal</option>
-		  <option value="6">PicPay</option>
-		  <option value="7">CelCoin</option>
-		  <option value="8">Zuum</option>
 		</select>
 	</fieldset>
     <fieldset>
@@ -148,11 +158,11 @@ if(pageType == "verify") {
 				sent = 2;
 				jQuery('#content').html('<h4>Agora, pode criar uma senha para sua conta:</h4><fieldset><input id="formpassword" placeholder="Digite sua nova senha aqui!" type="password" tabindex="1" required autofocus></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Terminar meu cadastro!</button></fieldset>');
 			} else {
-				jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
+				jQuery('#content').html('<h4>O código não confere. Você já confirmou seu cadastro ou ocorreu um erro no sistema. Entre em contato pelo email fale@swire.tv ou livechat.</h4>');
 			}
 		},
 		error: function() {
-			jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
+			jQuery('#content').html('<h4>Erro inesperado!</h4>');
 		}
 	});
 }
@@ -171,6 +181,7 @@ var sent = 0;
 
 var token;
 var emailp;
+var devicesp;
 var planp;
 jQuery('#contact').on('submit', function(ev){
 	ev.preventDefault();
@@ -181,22 +192,25 @@ jQuery('#contact').on('submit', function(ev){
 		var phonep = jQuery('#formphone').val();
 		planp = jQuery('#formplan').val();
 		var paymentp = jQuery('#formpay').val();
+		devicesp = jQuery('#formdevices').val();
 		var howfindp = jQuery('#formhowfind').val();
 		jQuery('#content').html('<h4 style="text-align:center;">Enviando... Aguarde!</h4>');
 		jQuery.post({
 			url: "api/register",
-			data: {name: namep, email: emailp, phone: phonep, plan: planp, payment: paymentp, howfind: howfindp, type: pageType},
+			data: {name: namep, email: emailp, phone: phonep, pack: planp, devices: devicesp, payment: paymentp, howfind: howfindp, type: pageType},
 			success: function(msg){
 				var res = msg.split("|");
 				if(res[0] == "true") {
 					sent = 1;
 					jQuery('#content').html('<h4>Enviei um código pro seu email, pode colocar ele aqui embaixo?</h4><fieldset><input id="formcode" placeholder="Coloque seu código aqui!" type="text" tabindex="1" required autofocus maxlength="5" pattern=".{5,5}"></fieldset><fieldset><button name="submit" type="submit" id="contact-submit">Enviar meu código!</button></fieldset>');
+				} else if(res[0] == "userexists") {
+					jQuery('#content').html('<h4>Você já fez o seu cadastro! Caso precise de suporte entre em contato pelo email fale@swire.tv ou pelo livechat.</h4>');
 				} else {
-					jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
+					jQuery('#content').html('<h4>Ocorreu um erro! Entre em contato pelo email fale@swire.tv ou pelo livechat.</h4>');
 				}
 			},
 			error: function() {
-				jQuery('#content').html('<h4>Assim que possivel entraremos em contato no whatsapp! Até logo!</h4>');
+				jQuery('#content').html('<h4>Ocorreu um erro! Entre em contato pelo email fale@swire.tv ou pelo livechat.</h4>');
 			}
 		});
 	} else if(sent == "1") {
