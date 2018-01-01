@@ -69,17 +69,30 @@ document,'script','https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '707310706126458');
 fbq('track', 'PageView');
 </script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId            : '937860513023210',
+      autoLogAppEvents : true,
+      xfbml            : true,
+      version          : 'v2.11'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/pt_BR/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=707310706126458&ev=PageView&noscript=1"
 /></noscript>
 </head>
 
 <body class="home page-template-default page page-id-2099 stack--rounded normal-layout dropdowns--click wpb-js-composer js-comp-ver-5.1.1 vc_responsive variant-content variant-v1-1-1">
-<div class="fb-customerchat"
- page_id="544874642568935"
- ref=""
- minimized="false">
-</div>
 <div class="main-container">
     <section class="cover imagebg text-center image--light parallax height-100" data-overlay="4">
         <div class="background-image-holder background--top"><img alt="" src="images/image1.jpg"></div>
@@ -93,6 +106,11 @@ src="https://www.facebook.com/tr?id=707310706126458&ev=PageView&noscript=1"
             <!--end of row-->
         </div>
         <!--end of container-->
+<div class="fb-customerchat"
+ page_id="544874642568935"
+ ref=""
+ minimized="false">
+</div>
     </section>
     <section class="text-center  bg--dark space--sm">
         <div class="container">
@@ -255,24 +273,6 @@ src="https://www.facebook.com/tr?id=707310706126458&ev=PageView&noscript=1"
   ga('create', 'UA-102290073-1', 'auto');
   ga('send', 'pageview');
 
-</script>
-	<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId            : '937860513023210',
-      autoLogAppEvents : true,
-      xfbml            : true,
-      version          : 'v2.11'
-    });
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "https://connect.facebook.net/pt_BR/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
 </script>
 
 </body></html>
