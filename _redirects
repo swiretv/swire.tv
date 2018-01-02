@@ -7,5 +7,5 @@ http://s1.swire.tv/:usern/:passw/:ty/:ot http://livehd.swiretv.stream:8000/get.p
 https://s2.swire.tv/:usern/:passw/:ty/:ot http://sbl.swiretv.stream:8081/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
 http://s2.swire.tv/:usern/:passw/:ty/:ot http://sbl.swiretv.stream:8081/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
 
-https://s3.swire.tv/:usern/:passw/:ty/:ot http://elite.swiretv.stream:55461/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
-http://s3.swire.tv/:usern/:passw/:ty/:ot http://elite.swiretv.stream:55461/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
+https://s3.swire.tv/:usern/:passw/:ty/:ot http://195.181.162.83:55461/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
+http://s3.swire.tv/:usern/:passw/:ty/:ot http://195.181.162.83:55461/get.php?username=:usern&password=:passw&type=:ty&output=:ot 302
